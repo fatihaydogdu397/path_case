@@ -4,18 +4,18 @@ import '../../views/home/home_viewmodel.dart';
 import '../app_shelf.dart';
 
 class CharacterList extends StatelessWidget {
-  final HomeViewmodel model;
-  const CharacterList({Key? key, required this.model}) : super(key: key);
+  final HomeViewmodel? model;
+  const CharacterList({Key? key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
-      controller: model.scrollController,
-      itemCount: model.result.length,
+      controller: model?.scrollController,
+      itemCount: model?.result.length ?? 0,
       itemBuilder: (context, index) {
-        String imageUrl = model.result[index].thumbnail?.path ?? '';
-        String imageExtension = model.result[index].thumbnail?.extension ?? '';
+        String imageUrl = model?.result[index].thumbnail?.path ?? '';
+        String imageExtension = model?.result[index].thumbnail?.extension ?? '';
         return Container(
           height: context.height * 25,
           padding: context.mediumEdgeInsets,
@@ -26,7 +26,7 @@ class CharacterList extends StatelessWidget {
               borderRadius: context.highCircular,
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/details', arguments: model.result[index]);
+                  Navigator.pushNamed(context, '/details', arguments: model?.result[index]);
                 },
                 child: Row(
                   children: [
@@ -92,7 +92,7 @@ class CharacterList extends StatelessWidget {
           child: SizedBox(
             width: context.width * 50,
             child: AutoSizeText(
-              "${model.result[index].description}",
+              "${model?.result[index].description}",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontSize: 15,
@@ -116,7 +116,7 @@ class CharacterList extends StatelessWidget {
           child: SizedBox(
             width: context.width * 50,
             child: AutoSizeText(
-              "${model.result[index].name}",
+              "${model?.result[index].name}",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
